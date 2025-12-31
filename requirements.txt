@@ -1,8 +1,7 @@
-Streamlit
-Langchain
-Langchain_Groq
-Langchain_classic
-dotenv
+streamlit
+langchain-groq
+langchain-classic
+python-dotenv
 
 
 
