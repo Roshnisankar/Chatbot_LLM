@@ -13,20 +13,18 @@ response = requests.get(url, headers=headers)
 print(response.json())
 
 import streamlit as st
-from langchain_groq import ChatGroq
-#from langchain.chains import ConversationChain
-from langchain_classic.chains import ConversationChain
-#from langchain.memory import ConversationBufferMemory
-from langchain_classic.memory import ConversationBufferMemory
 import os
-from dotenv import load_dotenv
+from langchain_groq import ChatGroq
+from langchain_classic.chains import ConversationChain
+from langchain_classic.memory import ConversationBufferMemory
 
-load_dotenv()
-
-# Page configuration
-st.set_page_config(page_title="Groq Chatbot", page_icon="⚡")
+# Page config (mobile friendly)
+st.set_page_config(page_title="Groq Chatbot", page_icon="⚡", layout="centered")
 
 st.title("⚡ Groq Q&A Conversation Chatbot")
+
+# Get API key from Streamlit Secrets
+GROQ_API_KEY = st.secrets["GROQ_API_KEY"]
 
 # Initialize session state
 if "chat_history" not in st.session_state:
@@ -34,7 +32,7 @@ if "chat_history" not in st.session_state:
 
 if "conversation" not in st.session_state:
     llm = ChatGroq(
-        groq_api_key=os.getenv("GROQ_API_KEY"),
+        groq_api_key=GROQ_API_KEY,
         model_name="llama-3.1-8b-instant",
         temperature=0.4
     )
@@ -59,6 +57,11 @@ if st.button("Send") and user_input:
 # Display conversation
 for role, msg in st.session_state.chat_history:
     if role == "You":
+        st.markdown(f"🧑 **You:** {msg}")
+    else:
+        st.markdown(f"🤖 **Bot:** {msg}")
+
         st.markdown(f"*🧑 You:* {msg}")
     else:
+
         st.markdown(f"*🤖 Bot:* {msg}")
