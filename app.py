@@ -4,8 +4,10 @@ import streamlit as st
 api_key = os.getenv("GROQ_API_KEY")
 
 if not api_key:
-    st.error("GROQ API Key missing. Add it in Streamlit Secrets.")
+    st.error("GROQ API Key not found. Please add it in Streamlit Secrets.")
     st.stop()
+
+st.success("API Key loaded successfully")
 
 import requests
 url = "https://api.groq.com/openai/v1/models"
@@ -68,4 +70,5 @@ for role, msg in st.session_state.chat_history:
     else:
 
         st.markdown(f"*🤖 Bot:* {msg}")
+
 
