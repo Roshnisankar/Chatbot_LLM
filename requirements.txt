@@ -2,6 +2,7 @@ Streamlit
 Langchain
 Langchain_Groq
 Langchain_classic
-python_dotenv
+dotenv
+
 
 
