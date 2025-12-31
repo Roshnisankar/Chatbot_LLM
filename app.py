@@ -1,8 +1,11 @@
-from dotenv import load_dotenv
 import os
-load_dotenv()
+import streamlit as st
+
 api_key = os.getenv("GROQ_API_KEY")
-print("GROQ API Key:", api_key)
+
+if not api_key:
+    st.error("GROQ API Key missing. Add it in Streamlit Secrets.")
+    st.stop()
 
 import requests
 url = "https://api.groq.com/openai/v1/models"
@@ -65,3 +68,4 @@ for role, msg in st.session_state.chat_history:
     else:
 
         st.markdown(f"*🤖 Bot:* {msg}")
+
