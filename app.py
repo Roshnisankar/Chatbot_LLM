@@ -1,9 +1,8 @@
 import os
 import streamlit as st
 from langchain_groq import ChatGroq
-from langchain_classic.chains import ConversationChain
-from langchain_classic.memory import ConversationBufferMemory
-
+from langchain.chains import ConversationChain
+from langchain.memory import ConversationBufferMemory
 # Page config
 st.set_page_config(page_title="Groq Chatbot", page_icon="⚡", layout="centered")
 
@@ -49,3 +48,4 @@ for role, msg in st.session_state.chat_history:
         st.markdown(f"🧑 **You:** {msg}")
     else:
         st.markdown(f"🤖 **Bot:** {msg}")
+
